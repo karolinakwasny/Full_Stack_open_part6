@@ -8,7 +8,7 @@ const AnecdoteForm = () => {
     event.preventDefault()
     const content = event.target.anecdote.value
     if (content === '') {
-    return
+      return
     }
     event.target.anecdote.value = ''
     dispatch(createAnecdote(content))
