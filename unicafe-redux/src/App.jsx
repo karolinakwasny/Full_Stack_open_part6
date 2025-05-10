@@ -27,13 +27,13 @@ const App = ({ store }) => {
 
   return (
     <div>
-    <button onClick={good}>good</button>
-    <button onClick={ok}>ok</button>
-    <button onClick={bad}>bad</button>
-    <button onClick={reset}>reset stats</button>
-    <div>good {state.good}</div>
-    <div>ok {state.ok}</div>
-    <div>bad {state.bad}</div>
+      <button onClick={good}>good</button>
+      <button onClick={ok}>ok</button>
+      <button onClick={bad}>bad</button>
+      <button onClick={reset}>reset stats</button>
+      <div>good {state.good}</div>
+      <div>ok {state.ok}</div>
+      <div>bad {state.bad}</div>
     </div>
   )
   }

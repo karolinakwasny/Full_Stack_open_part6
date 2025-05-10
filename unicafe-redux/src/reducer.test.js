@@ -25,7 +25,7 @@ describe('unicafe reducer', () => {
 
     deepFreeze(state)
     const newState = counterReducer(state, action)
-    console.log(newState)
+    // console.log(newState)
     expect(newState).toEqual({
       good: 1,
       ok: 0,

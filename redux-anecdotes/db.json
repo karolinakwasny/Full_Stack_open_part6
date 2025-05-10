@@ -33,7 +33,12 @@
     {
       "id": "71cd",
       "content": "test",
-      "votes": 1
+      "votes": 2
+    },
+    {
+      "id": "ed9d",
+      "content": "testing",
+      "votes": 0
     }
   ]
 }
