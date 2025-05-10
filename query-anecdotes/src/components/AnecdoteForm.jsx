@@ -10,6 +10,12 @@ const AnecdoteForm = () => {
     mutationFn: createAnecdote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
+    },
+    onError: (error) => {
+      if (error.response) {
+        notificationAndDispatch({ type: 'SET_NOTIFICATION', payload: error.response.data.error })
+      } else
+      notificationAndDispatch({ type: 'SET_NOTIFICATION', payload: `anecdote service not available due to problems in server` })
     }
   })
 

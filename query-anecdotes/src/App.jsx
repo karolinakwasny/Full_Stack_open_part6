@@ -11,7 +11,14 @@ const App = () => {
     mutationFn: updateAnecdote,
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['anecdotes'] })
+    },
+    onError: (error) => {
+      if (error.response) {
+        notificationAndDispatch({ type: 'SET_NOTIFICATION', payload: error.response.data.error })
+      } else
+      notificationAndDispatch({ type: 'SET_NOTIFICATION', payload: `anecdote service not available due to problems in server` })
     }
+
   })
   const handleVote = (anecdote) => {
     console.log('vote')
@@ -27,14 +34,6 @@ const App = () => {
 
   if ( result.isLoading ) {
     return <div>loading data...</div>
-  }
-  if (result.isError) {
-    let errorMessage = null
-    if (result.error.message)
-      errorMessage = result.error.message
-    else
-      errorMessage = 'anecdote service not available due to problems in server'
-    return <span>Error: {errorMessage}</span>
   }
   const anecdotes = result.data
 
