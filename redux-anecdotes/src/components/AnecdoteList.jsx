@@ -11,10 +11,9 @@ const AnecdoteList = () => {
   const filteredAnecdotes = anecdotes.filter(anecdote =>
     filter === '' || anecdote.content.toLowerCase().includes(filter.toLowerCase())
   )
-  const vote = (id) => {
-    dispatch(voteForAnecdote(id))
-    const anecdote = anecdotes.find(a => a.id === id).content
-    dispatch(setNotificationTimeout(`you voted '${anecdote}'`))
+  const vote = async (anecdote) => {
+    dispatch(voteForAnecdote(anecdote))
+    dispatch(setNotificationTimeout(`you voted '${anecdote.content}'`, 5))
   }
 
   return (
@@ -28,7 +27,7 @@ const AnecdoteList = () => {
             </div>
             <div>
               has {anecdote.votes}
-              <button onClick={() => vote(anecdote.id)}>vote</button>
+              <button onClick={() => vote(anecdote)}>vote</button>
             </div>
           </div>
       )}

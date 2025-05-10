@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
-import { createAnecdote } from '../requests'
-import { useNotificationDispatch } from '../ContextProvider'
+import { createAnecdote } from '../requests/requests'
+import { useNotificationDispatch } from '../contexts/useNotification.js'
 
 const AnecdoteForm = () => {
   const queryClient = useQueryClient()
@@ -13,9 +13,15 @@ const AnecdoteForm = () => {
     },
     onError: (error) => {
       if (error.response) {
-        notificationAndDispatch({ type: 'SET_NOTIFICATION', payload: error.response.data.error })
+        notificationAndDispatch({
+          type: 'SET_NOTIFICATION',
+          payload: error.response.data.error
+        })
       } else
-      notificationAndDispatch({ type: 'SET_NOTIFICATION', payload: `anecdote service not available due to problems in server` })
+      notificationAndDispatch({
+        type: 'SET_NOTIFICATION',
+        payload: `anecdote service not available due to problems in server`
+      })
     }
   })
 
@@ -23,9 +29,18 @@ const AnecdoteForm = () => {
     event.preventDefault()
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
-    console.log('new anecdote')
+    if (content.length === 0) {
+      notificationAndDispatch({
+        type: 'SET_NOTIFICATION',
+        payload: `anecdote must be at least 1 character long`
+      })
+      return
+    }
     newAnecdoteMutation.mutate({ content, votes: 0 })
-    notificationAndDispatch({ type: 'SET_NOTIFICATION' , payload: `you created '${content}'`})
+    notificationAndDispatch({
+      type: 'SET_NOTIFICATION',
+      payload: `you created '${content}'`
+    })
 }
 
   return (
